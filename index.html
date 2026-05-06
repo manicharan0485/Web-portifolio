@@ -233,6 +233,44 @@ body::after {
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5.5px); }
 
 /* ═══════════════════════════════════════════════════
+   LANGUAGE SWITCHER
+═══════════════════════════════════════════════════ */
+.lang-switch {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 4px;
+  cursor: none;
+  transition: all .3s;
+}
+.lang-switch:hover {
+  border-color: rgba(232,25,44,0.3);
+  background: rgba(232,25,44,0.06);
+}
+.lang-btn {
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--white-30);
+  background: transparent;
+  border: none;
+  cursor: none;
+  transition: all .3s;
+}
+.lang-btn.active {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 0 12px rgba(232,25,44,0.4);
+}
+.lang-btn:not(.active):hover {
+  color: var(--white-60);
+}
+
+/* ═══════════════════════════════════════════════════
    HERO SECTION
 ═══════════════════════════════════════════════════ */
 .hero {
@@ -1127,12 +1165,17 @@ body::after {
   <div class="nav-inner">
     <div class="nav-logo">MR<span class="dot">.</span></div>
     <div class="nav-links" id="navLinks">
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-      <a href="Manicharan Ravi - CV.pdf" class="nav-btn" download><i class="fa-solid fa-download"></i> Resume</a>
+      <a href="#hero" data-i18n="nav_home">Home</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#services" data-i18n="nav_services">Services</a>
+      <a href="#experience" data-i18n="nav_experience">Experience</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="Manicharan Ravi - CV.pdf" class="nav-btn" download><i class="fa-solid fa-download"></i> <span data-i18n="nav_resume">Resume</span></a>
+      <!-- LANGUAGE SWITCHER -->
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+      </div>
     </div>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1148,21 +1191,21 @@ body::after {
 
     <!-- Left -->
     <div class="hero-left">
-      <div class="hero-eyebrow"><span class="pulse"></span>Available for Work &amp; Freelance</div>
+      <div class="hero-eyebrow"><span class="pulse"></span><span data-i18n="hero_status">Available for Work & Freelance</span></div>
       <h1 class="hero-h1">
-        <span class="w1">IT</span>
-        <span class="w2">Specialist</span>
-        <span class="w3">& Developer</span>
+        <span class="w1" data-i18n="hero_title1">IT</span>
+        <span class="w2" data-i18n="hero_title2">Specialist</span>
+        <span class="w3" data-i18n="hero_title3">& Developer</span>
       </h1>
       <div class="hero-roles">
         <span>// &nbsp;</span>
         <div class="roles-track">
-          <span>Cloud Engineer</span>
-          <span>Full-Stack Dev</span>
-          <span>DevOps Architect</span>
+          <span data-i18n="hero_role1">Cloud Engineer</span>
+          <span data-i18n="hero_role2">Full-Stack Dev</span>
+          <span data-i18n="hero_role3">DevOps Architect</span>
         </div>
       </div>
-      <p class="hero-desc">
+      <p class="hero-desc" data-i18n="hero_desc">
         Building <strong>resilient cloud infrastructure</strong> and
         <strong>scalable applications</strong> with 6+ years across AWS, Azure,
         Docker/Kubernetes and modern full-stack ecosystems.
@@ -1171,28 +1214,28 @@ body::after {
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
           <div class="btn-shine"></div>
-          <span>Hire Me</span><i class="fa-solid fa-arrow-right"></i>
+          <span data-i18n="btn_hire">Hire Me</span><i class="fa-solid fa-arrow-right"></i>
         </a>
         <a href="#experience" class="btn-glass">
-          <i class="fa-solid fa-briefcase"></i><span>My Work</span>
+          <i class="fa-solid fa-briefcase"></i><span data-i18n="btn_work">My Work</span>
         </a>
       </div>
       <div class="hero-stats">
         <div class="h-stat">
           <span class="n red" data-count="6">6 +</span>
-          <span class="l">Years Exp.</span>
+          <span class="l" data-i18n="stat_years">Years Exp.</span>
         </div>
         <div class="h-stat">
           <span class="n" data-count="120">286 +</span>
-          <span class="l">Projects</span>
+          <span class="l" data-i18n="stat_projects">Projects</span>
         </div>
         <div class="h-stat">
           <span class="n" data-count="50">10000+</span>
-          <span class="l">Users Supported</span>
+          <span class="l" data-i18n="stat_users">Users Supported</span>
         </div>
         <div class="h-stat">
           <span class="n">99.9%</span>
-          <span class="l">Uptime</span>
+          <span class="l" data-i18n="stat_uptime">Uptime</span>
         </div>
       </div>
     </div>
@@ -1208,21 +1251,21 @@ body::after {
           <div class="corner bl"></div>
           <div class="corner br"></div>
           <div class="status-badge">
-            <div class="status-dot"></div>Open to Work
+            <div class="status-dot"></div><span data-i18n="badge_open">Open to Work</span>
           </div>
         </div>
         <div class="chip chip-tl">
           <div class="chip-icon ci-red"><i class="fa-solid fa-server"></i></div>
           <div class="chip-text">
             <div class="t1">99.9%</div>
-            <div class="t2">Uptime Guaranteed</div>
+            <div class="t2" data-i18n="chip_uptime">Uptime Guaranteed</div>
           </div>
         </div>
         <div class="chip chip-br">
           <div class="chip-icon ci-white"><i class="fa-brands fa-aws"></i></div>
           <div class="chip-text">
             <div class="t1">AWS</div>
-            <div class="t2">Cloud Architect</div>
+            <div class="t2" data-i18n="chip_cloud">Cloud Architect</div>
           </div>
         </div>
       </div>
@@ -1303,7 +1346,7 @@ body::after {
         </div>
         <div class="about-exp">
           <div class="big">6+</div>
-          <div class="sm">Years Exp.</div>
+          <div class="sm" data-i18n="about_exp_label">Years Exp.</div>
         </div>
         <div class="about-tools">
           <div class="a-tool"><i class="fa-brands fa-aws" style="color:#FF9900"></i>AWS</div>
@@ -1312,29 +1355,33 @@ body::after {
         </div>
       </div>
       <div class="about-text r-r">
-        <span class="sec-tag">About Me</span>
-        <h2 class="sec-title">IT Expert<br><span>Problem Solver</span></h2>
-        <p>IT Specialist with <strong style="color:var(--white)">6+ years of experience</strong> spanning cloud infrastructure, system administration, full-stack development, and cybersecurity. M.Sc. in Computer Science from IU International University.</p>
-        <p>I've maintained 99.9% uptime for enterprise environments, architected scalable solutions on AWS and Azure, and built full-stack products used by 10,000+ monthly users. Open to senior IT, DevOps, and cloud roles across Germany.</p>
+        <span class="sec-tag" data-i18n="about_tag">About Me</span>
+        <h2 class="sec-title"><span data-i18n="about_title1">IT Expert</span><br><span data-i18n="about_title2">Problem Solver</span></h2>
+        <p data-i18n="about_p1">
+          IT Specialist with <strong style="color:var(--white)">6+ years of experience</strong> spanning cloud infrastructure, system administration, full-stack development, and cybersecurity. M.Sc. in Computer Science from IU International University.
+        </p>
+        <p data-i18n="about_p2">
+          I've maintained 99.9% uptime for enterprise environments, architected scalable solutions on AWS and Azure, and built full-stack products used by 10,000+ monthly users. Open to senior IT, DevOps, and cloud roles across Germany.
+        </p>
         <div class="skill-list">
           <div class="skill-item r d1">
-            <div class="si-top"><span class="si-name">Linux / Windows Server</span><span class="si-pct">95%</span></div>
+            <div class="si-top"><span class="si-name" data-i18n="skill_linux">Linux / Windows Server</span><span class="si-pct">95%</span></div>
             <div class="si-track"><div class="si-fill" data-w="95"></div></div>
           </div>
           <div class="skill-item r d2">
-            <div class="si-top"><span class="si-name">AWS / Azure Cloud</span><span class="si-pct">90%</span></div>
+            <div class="si-top"><span class="si-name" data-i18n="skill_cloud">AWS / Azure Cloud</span><span class="si-pct">90%</span></div>
             <div class="si-track"><div class="si-fill" data-w="90"></div></div>
           </div>
           <div class="skill-item r d3">
-            <div class="si-top"><span class="si-name">Docker / Kubernetes</span><span class="si-pct">92%</span></div>
+            <div class="si-top"><span class="si-name" data-i18n="skill_k8s">Docker / Kubernetes</span><span class="si-pct">92%</span></div>
             <div class="si-track"><div class="si-fill" data-w="92"></div></div>
           </div>
           <div class="skill-item r d4">
-            <div class="si-top"><span class="si-name">React.js / Node.js</span><span class="si-pct">88%</span></div>
+            <div class="si-top"><span class="si-name" data-i18n="skill_react">React.js / Node.js</span><span class="si-pct">88%</span></div>
             <div class="si-track"><div class="si-fill" data-w="88"></div></div>
           </div>
           <div class="skill-item r d5">
-            <div class="si-top"><span class="si-name">Cybersecurity / VAPT</span><span class="si-pct">84%</span></div>
+            <div class="si-top"><span class="si-name" data-i18n="skill_sec">Cybersecurity / VAPT</span><span class="si-pct">84%</span></div>
             <div class="si-track"><div class="si-fill" data-w="84"></div></div>
           </div>
         </div>
@@ -1347,56 +1394,56 @@ body::after {
 <section class="section services-bg" id="services">
   <div class="container">
     <div class="services-header r">
-      <span class="sec-tag">What I Do</span>
-      <h2 class="sec-title">Services &<br><em>Expertise</em></h2>
-      <p class="sec-sub">End-to-end IT solutions — from bare-metal to cloud, from frontend pixels to backend infrastructure.</p>
+      <span class="sec-tag" data-i18n="services_tag">What I Do</span>
+      <h2 class="sec-title"><span data-i18n="services_title1">Services &</span><br><em data-i18n="services_title2">Expertise</em></h2>
+      <p class="sec-sub" data-i18n="services_sub">End-to-end IT solutions — from bare-metal to cloud, from frontend pixels to backend infrastructure.</p>
     </div>
     <div class="svc-grid">
       <div class="svc-card r d1">
         <span class="svc-no">01 ───</span>
         <div class="svc-ico"><i class="fa-solid fa-server"></i></div>
-        <h3>System Administration</h3>
-        <p>Linux/Windows Server, Active Directory, M365/Intune, patch management, and enterprise-grade ops with guaranteed 99.9% uptime.</p>
+        <h3 data-i18n="svc1_title">System Administration</h3>
+        <p data-i18n="svc1_desc">Linux/Windows Server, Active Directory, M365/Intune, patch management, and enterprise-grade ops with guaranteed 99.9% uptime.</p>
         <div class="svc-tags"><span class="stag">Linux</span><span class="stag">Windows</span><span class="stag">M365</span><span class="stag">Intune</span></div>
         <div class="svc-glow"></div>
       </div>
       <div class="svc-card r d2">
         <span class="svc-no">02 ───</span>
         <div class="svc-ico"><i class="fa-solid fa-cloud"></i></div>
-        <h3>Cloud Infrastructure</h3>
-        <p>AWS & Azure architecture, EC2/S3/RDS, cost optimisation, Terraform IaC, and zero-downtime cloud migrations.</p>
+        <h3 data-i18n="svc2_title">Cloud Infrastructure</h3>
+        <p data-i18n="svc2_desc">AWS & Azure architecture, EC2/S3/RDS, cost optimisation, Terraform IaC, and zero-downtime cloud migrations.</p>
         <div class="svc-tags"><span class="stag">AWS</span><span class="stag">Azure</span><span class="stag">Terraform</span><span class="stag">GCP</span></div>
         <div class="svc-glow"></div>
       </div>
       <div class="svc-card r d3">
         <span class="svc-no">03 ───</span>
         <div class="svc-ico"><i class="fa-brands fa-docker"></i></div>
-        <h3>DevOps & Automation</h3>
-        <p>Docker/Kubernetes orchestration, CI/CD pipelines, GitOps, Power Automate, and Infrastructure as Code workflows.</p>
+        <h3 data-i18n="svc3_title">DevOps & Automation</h3>
+        <p data-i18n="svc3_desc">Docker/Kubernetes orchestration, CI/CD pipelines, GitOps, Power Automate, and Infrastructure as Code workflows.</p>
         <div class="svc-tags"><span class="stag">Docker</span><span class="stag">K8s</span><span class="stag">CI/CD</span><span class="stag">GitOps</span></div>
         <div class="svc-glow"></div>
       </div>
       <div class="svc-card r d1">
         <span class="svc-no">04 ───</span>
         <div class="svc-ico"><i class="fa-solid fa-code"></i></div>
-        <h3>Full-Stack Development</h3>
-        <p>Scalable web apps using React.js, Node.js, Python, PHP — REST APIs, responsive UI, and secure backend systems.</p>
+        <h3 data-i18n="svc4_title">Full-Stack Development</h3>
+        <p data-i18n="svc4_desc">Scalable web apps using React.js, Node.js, Python, PHP — REST APIs, responsive UI, and secure backend systems.</p>
         <div class="svc-tags"><span class="stag">React</span><span class="stag">Node.js</span><span class="stag">Python</span><span class="stag">PHP</span></div>
         <div class="svc-glow"></div>
       </div>
       <div class="svc-card r d2">
         <span class="svc-no">05 ───</span>
         <div class="svc-ico"><i class="fa-solid fa-database"></i></div>
-        <h3>Database Engineering</h3>
-        <p>PostgreSQL, MongoDB, MS SQL Server — schema design, performance optimisation, backups, and disaster recovery.</p>
+        <h3 data-i18n="svc5_title">Database Engineering</h3>
+        <p data-i18n="svc5_desc">PostgreSQL, MongoDB, MS SQL Server — schema design, performance optimisation, backups, and disaster recovery.</p>
         <div class="svc-tags"><span class="stag">PostgreSQL</span><span class="stag">MongoDB</span><span class="stag">SQL Server</span></div>
         <div class="svc-glow"></div>
       </div>
       <div class="svc-card r d3">
         <span class="svc-no">06 ───</span>
         <div class="svc-ico"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3>Cybersecurity</h3>
-        <p>VAPT, vulnerability assessments, penetration testing, security audits, risk remediation, and zero-trust protocols.</p>
+        <h3 data-i18n="svc6_title">Cybersecurity</h3>
+        <p data-i18n="svc6_desc">VAPT, vulnerability assessments, penetration testing, security audits, risk remediation, and zero-trust protocols.</p>
         <div class="svc-tags"><span class="stag">VAPT</span><span class="stag">Zero Trust</span><span class="stag">Audit</span><span class="stag">Pentesting</span></div>
         <div class="svc-glow"></div>
       </div>
@@ -1408,51 +1455,51 @@ body::after {
 <section class="section" id="experience">
   <div class="container">
     <div class="r" style="margin-bottom:60px">
-      <span class="sec-tag">Work History</span>
-      <h2 class="sec-title">Professional<br><span>Experience</span></h2>
+      <span class="sec-tag" data-i18n="exp_tag">Work History</span>
+      <h2 class="sec-title"><span data-i18n="exp_title1">Professional</span><br><span data-i18n="exp_title2">Experience</span></h2>
     </div>
     <div class="exp-grid">
       <div class="exp-card r d1">
         <div class="exp-stripe"></div>
         <span class="exp-date">Apr 2025 – Mar 2026</span>
-        <h3 class="exp-role">IT Specialist & Cloud Engineer</h3>
+        <h3 class="exp-role" data-i18n="exp1_role">IT Specialist & Cloud Engineer</h3>
         <p class="exp-company"><i class="fa-solid fa-building"></i>RP Solutions GmbH · Mainz, Germany</p>
-        <p class="exp-desc">Led end-to-end IT operations for 50+ users. AWS/Azure cloud, Docker/Kubernetes, M365/Intune admin. Reduced deployment times by 40%, maintained 99.9% uptime across all systems.</p>
+        <p class="exp-desc" data-i18n="exp1_desc">Led end-to-end IT operations for 50+ users. AWS/Azure cloud, Docker/Kubernetes, M365/Intune admin. Reduced deployment times by 40%, maintained 99.9% uptime across all systems.</p>
       </div>
       <div class="exp-card r d2">
         <div class="exp-stripe"></div>
         <span class="exp-date">Jan 2022 – Dec 2023</span>
-        <h3 class="exp-role">Full-Stack Developer (Remote)</h3>
+        <h3 class="exp-role" data-i18n="exp2_role">Full-Stack Developer (Remote)</h3>
         <p class="exp-company"><i class="fa-solid fa-globe"></i>CloudMellow · Frisco, Texas (Remote)</p>
-        <p class="exp-desc">Cloud-hosted APIs and backend services in Python, JS, PHP on AWS. 30% performance improvement via query optimisation and caching. 40% organic traffic increase through backend-driven SEO.</p>
+        <p class="exp-desc" data-i18n="exp2_desc">Cloud-hosted APIs and backend services in Python, JS, PHP on AWS. 30% performance improvement via query optimisation and caching. 40% organic traffic increase through backend-driven SEO.</p>
       </div>
       <div class="exp-card r d1">
         <div class="exp-stripe"></div>
         <span class="exp-date">Jan 2019 – Dec 2021</span>
-        <h3 class="exp-role">Full-Stack Dev & Linux Admin</h3>
+        <h3 class="exp-role" data-i18n="exp3_role">Full-Stack Dev & Linux Admin</h3>
         <p class="exp-company"><i class="fa-solid fa-building"></i>Indo-Euro Synchronisation · Aachen</p>
-        <p class="exp-desc">Web apps with Java, Spring Boot, React.js, Node.js serving 10,000+ monthly users on high-availability AWS. Linux admin, RESTful microservices, 90% organic traffic growth.</p>
+        <p class="exp-desc" data-i18n="exp3_desc">Web apps with Java, Spring Boot, React.js, Node.js serving 10,000+ monthly users on high-availability AWS. Linux admin, RESTful microservices, 90% organic traffic growth.</p>
       </div>
       <div class="exp-card r d2">
         <div class="exp-stripe"></div>
         <span class="exp-date">Aug – Dec 2018</span>
-        <h3 class="exp-role">Research Intern — Industry 4.0</h3>
+        <h3 class="exp-role" data-i18n="exp4_role">Research Intern — Industry 4.0</h3>
         <p class="exp-company"><i class="fa-solid fa-university"></i>RWTH Aachen University</p>
-        <p class="exp-desc">Python data collection for PLC-integrated manufacturing systems. Automated reporting pipeline cut manual processing by 35%. RESTful interfaces connecting sensor networks to analytics.</p>
+        <p class="exp-desc" data-i18n="exp4_desc">Python data collection for PLC-integrated manufacturing systems. Automated reporting pipeline cut manual processing by 35%. RESTful interfaces connecting sensor networks to analytics.</p>
       </div>
       <div class="exp-card r d1">
         <div class="exp-stripe"></div>
         <span class="exp-date">Feb – Jul 2018</span>
-        <h3 class="exp-role">Cybersecurity Intern</h3>
+        <h3 class="exp-role" data-i18n="exp5_role">Cybersecurity Intern</h3>
         <p class="exp-company"><i class="fa-solid fa-shield-halved"></i>Supraja Technologies · Vijayawada, India</p>
-        <p class="exp-desc">VAPT on systems, networks, and web applications. Documented 30+ vulnerabilities. Delivered security audits with remediation roadmaps to technical and executive stakeholders.</p>
+        <p class="exp-desc" data-i18n="exp5_desc">VAPT on systems, networks, and web applications. Documented 30+ vulnerabilities. Delivered security audits with remediation roadmaps to technical and executive stakeholders.</p>
       </div>
       <div class="exp-card edu-card r d2">
         <div class="exp-stripe" style="background:linear-gradient(180deg,var(--red),transparent)"></div>
-        <span class="exp-date" style="color:rgba(255,160,160,0.8)">Education</span>
-        <h3 class="exp-role">M.Sc. Computer Science</h3>
+        <span class="exp-date" style="color:rgba(255,160,160,0.8)" data-i18n="edu_label">Education</span>
+        <h3 class="exp-role" data-i18n="edu_degree">M.Sc. Computer Science</h3>
         <p class="exp-company"><i class="fa-solid fa-graduation-cap"></i>IU International University · Berlin</p>
-        <p class="exp-desc">Cloud computing, distributed systems, and software engineering. B.Tech in Electronics & Communication Engineering from JNTUK, India (2021). English C2, German B1.</p>
+        <p class="exp-desc" data-i18n="edu_desc">Cloud computing, distributed systems, and software engineering. B.Tech in Electronics & Communication Engineering from JNTUK, India (2021). English C2, German B1.</p>
       </div>
     </div>
   </div>
@@ -1465,22 +1512,22 @@ body::after {
       <div class="stat-item r">
         <span class="stat-ico"><i class="fa-solid fa-briefcase"></i></span>
         <span class="stat-n" data-count="120">286 +</span>
-        <span class="stat-l">Projects Done</span>
+        <span class="stat-l" data-i18n="stat1">Projects Done</span>
       </div>
       <div class="stat-item r d1">
         <span class="stat-ico"><i class="fa-solid fa-clock"></i></span>
         <span class="stat-n" data-count="6">6 +</span>
-        <span class="stat-l">Years Experience</span>
+        <span class="stat-l" data-i18n="stat2">Years Experience</span>
       </div>
       <div class="stat-item r d2">
         <span class="stat-ico"><i class="fa-solid fa-gauge-high"></i></span>
         <span class="stat-n">99.9%</span>
-        <span class="stat-l">Uptime Achieved</span>
+        <span class="stat-l" data-i18n="stat3">Uptime Achieved</span>
       </div>
       <div class="stat-item r d3">
         <span class="stat-ico"><i class="fa-solid fa-users"></i></span>
         <span class="stat-n" data-count="50">10000+</span>
-        <span class="stat-l">Users Supported</span>
+        <span class="stat-l" data-i18n="stat4">Users Supported</span>
       </div>
     </div>
   </div>
@@ -1491,19 +1538,19 @@ body::after {
   <canvas id="cta-canvas"></canvas>
   <div class="container cta-inner">
     <div class="cta-glass r">
-      <span class="sec-tag" style="justify-content:center">Let's Work Together</span>
-      <h2 class="cta-title">Let's Build<br>Something <span>Great</span></h2>
-      <p class="cta-sub">Available for full-time roles in Germany and remote freelance projects worldwide. Let's talk about your next challenge.</p>
+      <span class="sec-tag" style="justify-content:center" data-i18n="cta_tag">Let's Work Together</span>
+      <h2 class="cta-title"><span data-i18n="cta_title1">Let's Build</span><br><span data-i18n="cta_title2">Something </span><span data-i18n="cta_title3">Great</span></h2>
+      <p class="cta-sub" data-i18n="cta_sub">Available for full-time roles in Germany and remote freelance projects worldwide. Let's talk about your next challenge.</p>
       <div class="cta-btns">
         <a href="mailto:manicharan.ravi999@gmail.com" class="btn-primary">
           <div class="btn-shine"></div>
-          <span>Send Email</span><i class="fa-solid fa-envelope"></i>
+          <span data-i18n="btn_email">Send Email</span><i class="fa-solid fa-envelope"></i>
         </a>
         <a href="https://www.linkedin.com/in/manicharan-ravi/" target="_blank" class="btn-glass">
           <i class="fa-brands fa-linkedin-in"></i><span>LinkedIn</span>
         </a>
         <a href="Manicharan Ravi - CV.pdf" download class="btn-glass">
-          <i class="fa-solid fa-download"></i><span>Resume</span>
+          <i class="fa-solid fa-download"></i><span data-i18n="btn_resume">Resume</span>
         </a>
       </div>
       <div class="cta-contacts">
@@ -1521,7 +1568,7 @@ body::after {
     <div class="footer-grid">
       <div class="f-brand">
         <div class="f-logo">MR<span class="dot">.</span></div>
-        <p>IT Specialist & Full-Stack Developer in Mainz, Germany. Cloud infrastructure, DevOps, and scalable web solutions.</p>
+        <p data-i18n="footer_desc">IT Specialist & Full-Stack Developer in Mainz, Germany. Cloud infrastructure, DevOps, and scalable web solutions.</p>
         <div class="f-social">
           <a href="https://www.linkedin.com/in/manicharan-ravi/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="https://github.com/manicharan0485" target="_blank"><i class="fa-brands fa-github"></i></a>
@@ -1529,27 +1576,27 @@ body::after {
         </div>
       </div>
       <div class="f-col">
-        <h5>Navigation</h5>
+        <h5 data-i18n="footer_nav">Navigation</h5>
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" data-i18n="nav_about">About</a></li>
+          <li><a href="#services" data-i18n="nav_services">Services</a></li>
+          <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
       </div>
       <div class="f-col">
-        <h5>Services</h5>
+        <h5 data-i18n="footer_svc">Services</h5>
         <ul>
-          <li><a href="#services">System Admin</a></li>
-          <li><a href="#services">Cloud Infra</a></li>
-          <li><a href="#services">Full-Stack Dev</a></li>
-          <li><a href="#services">DevOps</a></li>
-          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#services" data-i18n="svc1_title">System Admin</a></li>
+          <li><a href="#services" data-i18n="svc2_title">Cloud Infra</a></li>
+          <li><a href="#services" data-i18n="svc4_title">Full-Stack Dev</a></li>
+          <li><a href="#services" data-i18n="svc3_title">DevOps</a></li>
+          <li><a href="#services" data-i18n="svc6_title">Cybersecurity</a></li>
         </ul>
       </div>
     </div>
     <div class="f-bottom">
-      <span>© 2026 Manicharan Ravi — All rights reserved.</span>
+      <span data-i18n="footer_copy">© 2026 Manicharan Ravi — All rights reserved.</span>
       <span>Mainz, Germany · manicharan.ravi999@gmail.com</span>
     </div>
   </div>
@@ -1559,6 +1606,216 @@ body::after {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+/* ════════════════════════════════════════════════════
+   TRANSLATIONS
+════════════════════════════════════════════════════ */
+const translations = {
+  en: {
+    nav_home: "Home",
+    nav_about: "About",
+    nav_services: "Services",
+    nav_experience: "Experience",
+    nav_contact: "Contact",
+    nav_resume: "Resume",
+    hero_status: "Available for Work & Freelance",
+    hero_title1: "IT",
+    hero_title2: "Specialist",
+    hero_title3: "& Developer",
+    hero_role1: "Cloud Engineer",
+    hero_role2: "Full-Stack Dev",
+    hero_role3: "DevOps Architect",
+    hero_desc: 'Building <strong>resilient cloud infrastructure</strong> and <strong>scalable applications</strong> with 6+ years across AWS, Azure, Docker/Kubernetes and modern full-stack ecosystems. Based in <strong>Mainz, Germany</strong>.',
+    btn_hire: "Hire Me",
+    btn_work: "My Work",
+    stat_years: "Years Exp.",
+    stat_projects: "Projects",
+    stat_users: "Users Supported",
+    stat_uptime: "Uptime",
+    badge_open: "Open to Work",
+    chip_uptime: "Uptime Guaranteed",
+    chip_cloud: "Cloud Architect",
+    about_tag: "About Me",
+    about_title1: "IT Expert",
+    about_title2: "Problem Solver",
+    about_p1: 'IT Specialist with <strong style="color:var(--white)">6+ years of experience</strong> spanning cloud infrastructure, system administration, full-stack development, and cybersecurity. M.Sc. in Computer Science from IU International University.',
+    about_p2: "I've maintained 99.9% uptime for enterprise environments, architected scalable solutions on AWS and Azure, and built full-stack products used by 10,000+ monthly users. Open to senior IT, DevOps, and cloud roles across Germany.",
+    about_exp_label: "Years Exp.",
+    skill_linux: "Linux / Windows Server",
+    skill_cloud: "AWS / Azure Cloud",
+    skill_k8s: "Docker / Kubernetes",
+    skill_react: "React.js / Node.js",
+    skill_sec: "Cybersecurity / VAPT",
+    services_tag: "What I Do",
+    services_title1: "Services &",
+    services_title2: "Expertise",
+    services_sub: "End-to-end IT solutions — from bare-metal to cloud, from frontend pixels to backend infrastructure.",
+    svc1_title: "System Administration",
+    svc1_desc: "Linux/Windows Server, Active Directory, M365/Intune, patch management, and enterprise-grade ops with guaranteed 99.9% uptime.",
+    svc2_title: "Cloud Infrastructure",
+    svc2_desc: "AWS & Azure architecture, EC2/S3/RDS, cost optimisation, Terraform IaC, and zero-downtime cloud migrations.",
+    svc3_title: "DevOps & Automation",
+    svc3_desc: "Docker/Kubernetes orchestration, CI/CD pipelines, GitOps, Power Automate, and Infrastructure as Code workflows.",
+    svc4_title: "Full-Stack Development",
+    svc4_desc: "Scalable web apps using React.js, Node.js, Python, PHP — REST APIs, responsive UI, and secure backend systems.",
+    svc5_title: "Database Engineering",
+    svc5_desc: "PostgreSQL, MongoDB, MS SQL Server — schema design, performance optimisation, backups, and disaster recovery.",
+    svc6_title: "Cybersecurity",
+    svc6_desc: "VAPT, vulnerability assessments, penetration testing, security audits, risk remediation, and zero-trust protocols.",
+    exp_tag: "Work History",
+    exp_title1: "Professional",
+    exp_title2: "Experience",
+    exp1_role: "IT Specialist & Cloud Engineer",
+    exp1_desc: "Led end-to-end IT operations for 50+ users. AWS/Azure cloud, Docker/Kubernetes, M365/Intune admin. Reduced deployment times by 40%, maintained 99.9% uptime across all systems.",
+    exp2_role: "Full-Stack Developer (Remote)",
+    exp2_desc: "Cloud-hosted APIs and backend services in Python, JS, PHP on AWS. 30% performance improvement via query optimisation and caching. 40% organic traffic increase through backend-driven SEO.",
+    exp3_role: "Full-Stack Dev & Linux Admin",
+    exp3_desc: "Web apps with Java, Spring Boot, React.js, Node.js serving 10,000+ monthly users on high-availability AWS. Linux admin, RESTful microservices, 90% organic traffic growth.",
+    exp4_role: "Research Intern — Industry 4.0",
+    exp4_desc: "Python data collection for PLC-integrated manufacturing systems. Automated reporting pipeline cut manual processing by 35%. RESTful interfaces connecting sensor networks to analytics.",
+    exp5_role: "Cybersecurity Intern",
+    exp5_desc: "VAPT on systems, networks, and web applications. Documented 30+ vulnerabilities. Delivered security audits with remediation roadmaps to technical and executive stakeholders.",
+    edu_label: "Education",
+    edu_degree: "M.Sc. Computer Science",
+    edu_desc: "Cloud computing, distributed systems, and software engineering. B.Tech in Electronics & Communication Engineering from JNTUK, India (2021). English C2, German B1.",
+    stat1: "Projects Done",
+    stat2: "Years Experience",
+    stat3: "Uptime Achieved",
+    stat4: "Users Supported",
+    cta_tag: "Let's Work Together",
+    cta_title1: "Let's Build",
+    cta_title2: "Something ",
+    cta_title3: "Great",
+    cta_sub: "Available for full-time roles in Germany and remote freelance projects worldwide. Let's talk about your next challenge.",
+    btn_email: "Send Email",
+    btn_resume: "Resume",
+    footer_desc: "IT Specialist & Full-Stack Developer in Mainz, Germany. Cloud infrastructure, DevOps, and scalable web solutions.",
+    footer_nav: "Navigation",
+    footer_svc: "Services",
+    footer_copy: "© 2026 Manicharan Ravi — All rights reserved."
+  },
+  de: {
+    nav_home: "Start",
+    nav_about: "Über mich",
+    nav_services: "Leistungen",
+    nav_experience: "Erfahrung",
+    nav_contact: "Kontakt",
+    nav_resume: "Lebenslauf",
+    hero_status: "Verfügbar für Arbeit & Freelance",
+    hero_title1: "IT",
+    hero_title2: "Spezialist",
+    hero_title3: "& Entwickler",
+    hero_role1: "Cloud Engineer",
+    hero_role2: "Full-Stack Dev",
+    hero_role3: "DevOps Architekt",
+    hero_desc: 'Aufbau <strong>resilienter Cloud-Infrastruktur</strong> und <strong>skalierbarer Anwendungen</strong> mit 6+ Jahren Erfahrung in AWS, Azure, Docker/Kubernetes und modernen Full-Stack-Ökosystemen. Ansässig in <strong>Mainz, Deutschland</strong>.',
+    btn_hire: "Kontaktieren",
+    btn_work: "Meine Arbeit",
+    stat_years: "Jahre Erf.",
+    stat_projects: "Projekte",
+    stat_users: "Nutzer",
+    stat_uptime: "Verfügbarkeit",
+    badge_open: "Offen für Arbeit",
+    chip_uptime: "Verfügbarkeit Garantiert",
+    chip_cloud: "Cloud Architekt",
+    about_tag: "Über mich",
+    about_title1: "IT Experte",
+    about_title2: "Problemlöser",
+    about_p1: 'IT-Spezialist mit <strong style="color:var(--white)">6+ Jahren Erfahrung</strong> in Cloud-Infrastruktur, Systemadministration, Full-Stack-Entwicklung und Cybersicherheit. M.Sc. Informatik von der IU Internationalen Hochschule.',
+    about_p2: "Ich habe 99,9% Verfügbarkeit für Unternehmensumgebungen sichergestellt, skalierbare Lösungen auf AWS und Azure entwickelt und Full-Stack-Produkte für 10.000+ monatliche Nutzer gebaut. Offen für Senior-IT-, DevOps- und Cloud-Rollen in ganz Deutschland.",
+    about_exp_label: "Jahre Erf.",
+    skill_linux: "Linux / Windows Server",
+    skill_cloud: "AWS / Azure Cloud",
+    skill_k8s: "Docker / Kubernetes",
+    skill_react: "React.js / Node.js",
+    skill_sec: "Cybersicherheit / VAPT",
+    services_tag: "Was ich mache",
+    services_title1: "Leistungen &",
+    services_title2: "Expertise",
+    services_sub: "End-to-End IT-Lösungen — von Bare-Metal bis Cloud, von Frontend-Pixeln bis Backend-Infrastruktur.",
+    svc1_title: "Systemadministration",
+    svc1_desc: "Linux/Windows Server, Active Directory, M365/Intune, Patch-Management und Enterprise-Ops mit garantierten 99,9% Verfügbarkeit.",
+    svc2_title: "Cloud-Infrastruktur",
+    svc2_desc: "AWS- & Azure-Architektur, EC2/S3/RDS, Kostenoptimierung, Terraform IaC und Cloud-Migrationen ohne Ausfallzeiten.",
+    svc3_title: "DevOps & Automatisierung",
+    svc3_desc: "Docker/Kubernetes-Orchestrierung, CI/CD-Pipelines, GitOps, Power Automate und Infrastructure-as-Code-Workflows.",
+    svc4_title: "Full-Stack-Entwicklung",
+    svc4_desc: "Skalierbare Web-Apps mit React.js, Node.js, Python, PHP — REST-APIs, responsive UI und sichere Backendsysteme.",
+    svc5_title: "Datenbank-Engineering",
+    svc5_desc: "PostgreSQL, MongoDB, MS SQL Server — Schema-Design, Performance-Optimierung, Backups und Disaster Recovery.",
+    svc6_title: "Cybersicherheit",
+    svc6_desc: "VAPT, Schwachstellenanalysen, Penetration Testing, Sicherheitsaudits, Risikobeseitigung und Zero-Trust-Protokolle.",
+    exp_tag: "Berufserfahrung",
+    exp_title1: "Berufliche",
+    exp_title2: "Erfahrung",
+    exp1_role: "IT-Spezialist & Cloud Engineer",
+    exp1_desc: "End-to-End IT-Betrieb für 50+ Nutzer. AWS/Azure Cloud, Docker/Kubernetes, M365/Intune Admin. Deployment-Zeiten um 40% reduziert, 99,9% Verfügbarkeit über alle Systeme.",
+    exp2_role: "Full-Stack-Entwickler (Remote)",
+    exp2_desc: "Cloud-gehostete APIs und Backend-Dienste in Python, JS, PHP auf AWS. 30% Performance-Verbesserung durch Query-Optimierung und Caching. 40% organisches Traffic-Wachstum durch Backend-SEO.",
+    exp3_role: "Full-Stack Dev & Linux Admin",
+    exp3_desc: "Web-Apps mit Java, Spring Boot, React.js, Node.js für 10.000+ monatliche Nutzer auf Hochverfügbarkeits-AWS. Linux-Admin, RESTful Microservices, 90% organisches Traffic-Wachstum.",
+    exp4_role: "Praktikant — Industrie 4.0",
+    exp4_desc: "Python-Datenerfassung für SPS-integrierte Fertigungssysteme. Automatisierte Berichtspipeline reduzierte manuelle Verarbeitung um 35%. RESTful Schnittstellen zur Vernetzung von Sensornetzwerken mit Analytics.",
+    exp5_role: "Praktikant Cybersicherheit",
+    exp5_desc: "VAPT an Systemen, Netzwerken und Web-Anwendungen. 30+ Schwachstellen dokumentiert. Sicherheitsaudits mit Behebungs-Roadmaps für technische und geschäftsführende Stakeholder.",
+    edu_label: "Ausbildung",
+    edu_degree: "M.Sc. Informatik",
+    edu_desc: "Cloud Computing, verteilte Systeme und Software Engineering. B.Tech in Elektronik & Kommunikationstechnik von JNTUK, Indien (2021). Englisch C2, Deutsch B1.",
+    stat1: "Projekte Abgeschlossen",
+    stat2: "Jahre Erfahrung",
+    stat3: "Verfügbarkeit Erreicht",
+    stat4: "Nutzer Unterstützt",
+    cta_tag: "Lass uns zusammenarbeiten",
+    cta_title1: "Lass uns etwas",
+    cta_title2: "Großartiges ",
+    cta_title3: "bauen",
+    cta_sub: "Verfügbar für Festanstellungen in Deutschland und Remote-Freelance-Projekte weltweit. Lass uns über deine nächste Herausforderung sprechen.",
+    btn_email: "E-Mail senden",
+    btn_resume: "Lebenslauf",
+    footer_desc: "IT-Spezialist & Full-Stack-Entwickler in Mainz, Deutschland. Cloud-Infrastruktur, DevOps und skalierbare Web-Lösungen.",
+    footer_nav: "Navigation",
+    footer_svc: "Leistungen",
+    footer_copy: "© 2026 Manicharan Ravi — Alle Rechte vorbehalten."
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  
+  // Update buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+  
+  // Update all translatable elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang][key]) {
+      // Preserve child elements (like <strong>) by checking if HTML content
+      if (translations[lang][key].includes('<')) {
+        el.innerHTML = translations[lang][key];
+      } else {
+        el.textContent = translations[lang][key];
+      }
+    }
+  });
+  
+  // Update page title
+  document.title = lang === 'de' 
+    ? 'Manicharan Ravi — IT-Spezialist & Full-Stack-Entwickler'
+    : 'Manicharan Ravi — IT Specialist & Full-Stack Developer';
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  setLang(currentLang);
+});
+
 /* ════════════════════════════════════════════════════
    PRELOADER
 ════════════════════════════════════════════════════ */
@@ -1590,7 +1847,7 @@ document.addEventListener('mousemove', e => {
 });
 document.addEventListener('mousedown', () => cRing.classList.add('click'));
 document.addEventListener('mouseup',   () => cRing.classList.remove('click'));
-const hoverEls = document.querySelectorAll('a,button,.svc-card,.exp-card,.a-tool,.chip,.btn-primary,.btn-glass');
+const hoverEls = document.querySelectorAll('a,button,.svc-card,.exp-card,.a-tool,.chip,.btn-primary,.btn-glass,.lang-switch,.lang-btn');
 hoverEls.forEach(el => {
   el.addEventListener('mouseenter', () => cRing.classList.add('hover'));
   el.addEventListener('mouseleave', () => cRing.classList.remove('hover'));
@@ -1610,7 +1867,6 @@ hoverEls.forEach(el => {
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 18;
 
-  // Scattered wireframe shapes
   const shapes = [];
   const geos = [
     new THREE.IcosahedronGeometry(0.6, 0),
@@ -1644,12 +1900,10 @@ hoverEls.forEach(el => {
     shapes.push(mesh);
   }
 
-  // Large background sphere grid
   const bgGeo = new THREE.SphereGeometry(12, 28, 18);
   const bgMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity: 0.025, transparent: true });
   scene.add(new THREE.Mesh(bgGeo, bgMat));
 
-  // Particle field
   const pGeo = new THREE.BufferGeometry();
   const N = 300;
   const pos = new Float32Array(N * 3);
@@ -1659,7 +1913,6 @@ hoverEls.forEach(el => {
     pos[i*3+2] = (Math.random() - 0.5) * 20;
   }
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  // mix red and white particles
   const colors = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
     if (i % 4 === 0) { colors[i*3]=0.91; colors[i*3+1]=0.098; colors[i*3+2]=0.17; }
@@ -1710,11 +1963,9 @@ hoverEls.forEach(el => {
     const rx = (e.clientY - cy) / r.height * -16;
     const ry = (e.clientX - cx) / r.width  *  16;
     card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.03,1.03,1.03)`;
-    // move shine
     const x = ((e.clientX - r.left) / r.width  * 100).toFixed(2);
     const y = ((e.clientY - r.top)  / r.height * 100).toFixed(2);
     inner.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 60%)`;
-    // update svc card css var for spotlight
     card.style.setProperty('--mx', x + '%');
     card.style.setProperty('--my', y + '%');
   });
@@ -1756,7 +2007,6 @@ document.querySelectorAll('.svc-card').forEach(card => {
     { r:330, s:0.003, ph:2.1, a:'255,255,255' },
   ];
 
-  // sparks
   const sparks = Array.from({length:30}, () => ({
     x: Math.random(), y: Math.random(),
     vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2,
@@ -1776,7 +2026,6 @@ document.querySelectorAll('.svc-card').forEach(card => {
       ctx.strokeStyle = `rgba(${ring.a},0.07)`;
       ctx.lineWidth = 1;
       ctx.stroke();
-      // dot on ring
       const dx = cx+ox + Math.cos(ring.ph*3)*ring.r;
       const dy = cy+oy + Math.sin(ring.ph*3)*ring.r;
       ctx.beginPath(); ctx.arc(dx,dy,2.5,0,Math.PI*2);
@@ -1811,7 +2060,6 @@ ham.addEventListener('click', () => {
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => { navL.classList.remove('open'); ham.classList.remove('open'); });
 });
-// active link
 const secs = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   const sy = window.scrollY + 140;
@@ -1938,7 +2186,6 @@ document.addEventListener('click', e => {
   document.body.appendChild(ripple);
   setTimeout(() => ripple.remove(), 600);
 });
-// inject ripple keyframes
 const style = document.createElement('style');
 style.textContent = `@keyframes ripple-out{0%{transform:translate(-50%,-50%) scale(1);opacity:0.7}100%{transform:translate(-50%,-50%) scale(16);opacity:0}}`;
 document.head.appendChild(style);
